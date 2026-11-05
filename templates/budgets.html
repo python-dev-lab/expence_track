@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Бюджеты{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Бюджеты</h2>
+    <a href="{{ url_for('add_budget') }}" class="btn btn-primary"><i class="bi bi-plus"></i> Новый бюджет</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+            <thead class="table-light">
+                <tr><th>Месяц</th><th>Категория</th><th class="text-end">Лимит</th><th class="text-end">Действия</th></tr>
+            </thead>
+            <tbody>
+            {% for b in budgets %}
+                <tr>
+                    <td><span class="badge bg-info text-dark">{{ b.month|month_ru }}</span></td>
+                    <td>{{ b.category.name }}</td>
+                    <td class="text-end fw-bold">{{ "%.2f"|format(b.limit_amount) }} ₽</td>
+                    <td class="text-end">
+                        <form method="post" action="{{ url_for('delete_budget', budget_id=b.id) }}"
+                              onsubmit="return confirm('Удалить бюджет?');" class="d-inline">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4" class="text-center text-muted py-4">Бюджетов нет</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

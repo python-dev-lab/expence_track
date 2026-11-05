@@ -1,0 +1,10 @@
+body { background: #f5f7fb; }
+.card { border: none; border-radius: 12px; }
+.card-header { background: #fff; border-bottom: 1px solid #eef1f5; font-weight: 600; }
+.navbar-brand { font-weight: 700; letter-spacing: .5px; }
+.table > :not(caption) > * > * { padding: .75rem 1rem; }
+.badge { font-weight: 500; }
+.progress { border-radius: 999px; background: #eef1f5; }
+.form-control, .form-select { border-radius: 8px; }
+.btn { border-radius: 8px; }
+footer { margin-top: 4rem; }
